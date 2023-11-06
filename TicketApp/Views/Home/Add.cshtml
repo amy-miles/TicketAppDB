@@ -1,0 +1,38 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Add Ticket";
+}
+
+@model Ticket
+
+<h2>New Ticket</h2>
+
+<div asp-validation-summary="All" class="text-danger"></div>
+
+<form asp-action="Add" method="post">
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label">Name:</label>
+        <input asp-for="Name" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="Description" class="form-label">Description:</label>
+        <input asp-for="Description" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="SprintNumber" class="form-label">Sprint Number:</label>
+        <input asp-for="SprintNumber" placeholder="Enter 1 - 10" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="PointValue" class="form-label">Point Value:</label>
+        <input asp-for="PointValue" placeholder="Enter 5, 10, 15, or 20" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="StatusID" class="form-label">StatusID:</label>
+        <select asp-for="StatusID" class="form-select" asp-items="@(new SelectList(ViewBag.Statuses, "StatusID", "StatusName"))">
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Add Ticket</button>
+
+</form>
