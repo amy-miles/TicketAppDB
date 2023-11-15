@@ -25,7 +25,7 @@ namespace TicketApp.Controllers
             var filters = new Filters(id);
 
             ViewBag.Filters = filters;
-            if (ViewBag.Statuses != null)
+            if (ViewBag.Statuses == null)
             {
                 ViewBag.Statuses = repository.GetStatuses();
             }            
