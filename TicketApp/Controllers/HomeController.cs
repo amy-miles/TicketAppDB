@@ -3,26 +3,40 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using TicketApp.Models;
+using TicketApp.Repository;
 
 namespace TicketApp.Controllers
 {
     public class HomeController : Controller
     {
-        private TicketContext context;
-        public HomeController(TicketContext ctx) => context = ctx;
+        //private TicketContext context;
+        //public HomeController(TicketContext ctx) => context = ctx;
+
+        private readonly ITicketRepository repository;
+         public HomeController(ITicketRepository ticketRepository)
+    {
+        repository = ticketRepository;
+       
+    }
+
 
         public IActionResult Index(string id)
         {
             var filters = new Filters(id);
-            ViewBag.Filters = filters;
-            ViewBag.Statuses = context.Statuses.ToList();
 
-            IQueryable<Ticket> query = context.Tickets
-                .Include(t => t.Status);
+            ViewBag.Filters = filters;
+            if (ViewBag.Statuses != null)
+            {
+                ViewBag.Statuses = repository.GetStatuses();
+            }            
+
+            IEnumerable<Ticket> query = repository.GetAllTickets();
+
             if (filters.HasStatus)
             {
                 query = query.Where(t => t.StatusID == filters.StatusID);
             }
+
             var tasks = query.OrderBy(t => t.StatusID).ToList();
             return View(tasks);
         }
@@ -30,7 +44,7 @@ namespace TicketApp.Controllers
         [HttpGet]
         public IActionResult Add()
         {
-            ViewBag.Statuses = context.Statuses.ToList();
+            ViewBag.Statuses = repository.GetStatuses();
             var task = new Ticket { StatusID = "todo" };
             return View(task);
 
@@ -40,13 +54,12 @@ namespace TicketApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                context.Tickets.Add(task);
-                context.SaveChanges();
+                repository.AddTicket(task);                
                 return RedirectToAction("Index");
             }
             else
             {
-                ViewBag.Statuses = context.Statuses.ToList();
+                ViewBag.Statuses = repository.GetStatuses();
                 return View(task);
             }
         }
@@ -60,11 +73,11 @@ namespace TicketApp.Controllers
         [HttpPost]
         public IActionResult MarkDone([FromRoute] string id, Ticket selected)
         {
-            selected = context.Tickets.Find(selected.TicketID)!;
+            selected = repository.GetTicketById(selected.TicketID)!;          
             if (selected != null)
             {
                 selected.StatusID = "done";
-                context.SaveChanges();
+                repository.SaveChanges();
 
             }
             return RedirectToAction("Index", new { ID = id });
@@ -74,11 +87,11 @@ namespace TicketApp.Controllers
         [HttpPost]
         public IActionResult MarkInProgress([FromRoute] string id, int TicketID)
         {
-            var selected = context.Tickets.Find(TicketID);
+            var selected = repository.GetTicketById(TicketID);
             if (selected != null)
             {
                 selected.StatusID = "inprogress";
-                context.SaveChanges();
+                repository.SaveChanges();
             }
 
             return RedirectToAction("Index", new { id });
@@ -87,27 +100,29 @@ namespace TicketApp.Controllers
         [HttpPost]
         public IActionResult MarkQA([FromRoute] string id, int TicketID)
         {
-            var selected = context.Tickets.Find(TicketID);
+            var selected = repository.GetTicketById(TicketID);
             if (selected != null)
             {
                 selected.StatusID = "qa";
-                context.SaveChanges();
+                repository.SaveChanges();
             }
 
             return RedirectToAction("Index", new { id });
         }
 
         [HttpPost]
-        public IActionResult DeleteDone(string id)
+        public IActionResult DeleteDone(int id)
         {
-            var toDelete = context.Tickets
-                .Where(t => t.StatusID == "done").ToList();
+            IEnumerable<Ticket> toDelete = repository.GetAllTickets();
+                
 
-            foreach (var task in toDelete)
+            foreach (var ticket in toDelete)
             {
-                context.Tickets.Remove(task);
+                if (ticket.Status.StatusName == "Done"){
+                    repository.DeleteTicket(id);
+                }
             }
-            context.SaveChanges();
+            repository.SaveChanges();
             return RedirectToAction("Index");
         }
 

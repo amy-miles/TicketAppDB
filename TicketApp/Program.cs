@@ -1,8 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using TicketApp.Models;
+using TicketApp.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
-
+builder.Services.AddTransient<ITicketRepository, TicketRepository>();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 //Add EF Core Dependency Injection
