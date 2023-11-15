@@ -6,12 +6,11 @@ namespace TicketApp.Repository
     public class TicketRepository : ITicketRepository
     {
         private readonly TicketContext context;
-        private object ViewBag;
         
 
-        public TicketRepository(TicketContext context)
+        public TicketRepository(TicketContext cntx)
         {
-            context = context;
+            context = cntx;
         }
 
         public IEnumerable<Ticket> GetTasks(string id)

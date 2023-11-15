@@ -1,20 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\almds\\source\\repos\\TicketApp\\TicketApp\\TicketApp.csproj": {}
+    "C:\\Users\\nurl_\\Desktop\\DMACC\\students\\Amy\\TicketAppDB\\TicketApp\\TicketApp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\almds\\source\\repos\\TicketApp\\TicketApp\\TicketApp.csproj": {
+    "C:\\Users\\nurl_\\Desktop\\DMACC\\students\\Amy\\TicketAppDB\\TicketApp\\TicketApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\almds\\source\\repos\\TicketApp\\TicketApp\\TicketApp.csproj",
+        "projectUniqueName": "C:\\Users\\nurl_\\Desktop\\DMACC\\students\\Amy\\TicketAppDB\\TicketApp\\TicketApp.csproj",
         "projectName": "TicketApp",
-        "projectPath": "C:\\Users\\almds\\source\\repos\\TicketApp\\TicketApp\\TicketApp.csproj",
-        "packagesPath": "C:\\Users\\almds\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\almds\\source\\repos\\TicketApp\\TicketApp\\obj\\",
+        "projectPath": "C:\\Users\\nurl_\\Desktop\\DMACC\\students\\Amy\\TicketAppDB\\TicketApp\\TicketApp.csproj",
+        "packagesPath": "C:\\Users\\nurl_\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\nurl_\\Desktop\\DMACC\\students\\Amy\\TicketAppDB\\TicketApp\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\almds\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\nurl_\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -70,7 +73,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }
