@@ -33,42 +33,7 @@
                     <th>Mark Done</th>
                 </tr>
             </thead>
-            <tbody>
-                @foreach (Ticket task in Model)
-                {
-                    <tr>
-                        <td>@task.Name</td>
-                        <td>@task.Description</td>
-                        <td>@task.SprintNumber</td>
-                        <td>@task.PointValue</td>
-                        <td>@task.Status.StatusName</td>
-                        <td>
-                            <form asp-action="MarkInProgress" method="post" asp-route-id="@ViewBag.Filters.Filterstring">
-                                <input type="hidden" name="TicketID" value="@task.TicketID" />
-                                <button type="submit" class="btn btn-primary btn-sm">
-                                    Mark In Progress
-                                </button>
-                            </form>
-                        </td>
-                        <td>
-                            <form asp-action="MarkQA" method="post" asp-route-id="@ViewBag.Filters.Filterstring">
-                                <input type="hidden" name="TicketID" value="@task.TicketID" />
-                                <button type="submit" class="btn btn-primary btn-sm">
-                                    Mark Quality Assurance
-                                </button>
-                            </form>
-                        </td>
-                        <td>
-                            <form asp-action="MarkDone" method="post" asp-route-id="@ViewBag.Filters.Filterstring">
-                                <input type="hidden" name="TicketID" value="@task.TicketID" />
-                                <button type="submit" class="btn btn-primary btn-sm">
-                                    Mark Done
-                                </button>
-                            </form>
-                        </td>
-                    </tr>
-                }
-            </tbody>
+            <partial name="_ButtonPartial.cshtml" />
         </table>
         <form asp-action="DeleteDone" method="post" asp-route-id="@ViewBag.Filters.Filterstring">
             <a asp-action="Add" class="btn btn-primary"> Add new ticket</a>
