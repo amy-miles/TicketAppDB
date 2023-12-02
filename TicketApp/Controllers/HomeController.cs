@@ -1,4 +1,5 @@
 ﻿
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
@@ -126,6 +127,7 @@ namespace TicketApp.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize]
         public IActionResult Privacy()
         {
             return View();
