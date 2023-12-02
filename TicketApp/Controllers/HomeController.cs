@@ -8,6 +8,7 @@ using TicketApp.Repository;
 
 namespace TicketApp.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         //private TicketContext context;
@@ -126,8 +127,7 @@ namespace TicketApp.Controllers
             repository.SaveChanges();
             return RedirectToAction("Index");
         }
-
-        [Authorize]
+       
         public IActionResult Privacy()
         {
             return View();
